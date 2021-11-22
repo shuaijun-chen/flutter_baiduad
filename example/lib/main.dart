@@ -66,6 +66,7 @@ class _MyAppState extends State<MyApp> {
 
   //注册
   void _initRegister() async {
+    _oaid = await FlutterBaiduad.getOAID();
     _isRegister = await FlutterBaiduad.register(
       androidAppId: "ae5dfabe",
       //穿山甲广告 Android appid 必填
@@ -89,7 +90,6 @@ class _MyAppState extends State<MyApp> {
       );
     }
     _sdkVersion = await FlutterBaiduad.getSDKVersion();
-    _oaid = await FlutterBaiduad.getOAID();
     setState(() {});
   }
 
