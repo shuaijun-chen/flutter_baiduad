@@ -14,6 +14,9 @@ typedef BOnClick = void Function();
 ///关闭
 typedef BOnClose = void Function();
 
+///曝光
+typedef BOnExpose = void Function();
+
 ///点击
 typedef BOnFail = void Function(int code, dynamic message);
 
@@ -78,4 +81,16 @@ class FlutterBaiduAdSplashCallBack {
 
   FlutterBaiduAdSplashCallBack(
       {this.onShow, this.onFail, this.onClick,this.onClose});
+}
+
+///splash广告回调
+class FlutterBaiduAdNativeCallBack {
+  BOnShow? onShow;
+  BOnFail? onFail;
+  BOnClick? onClick;
+  BOnClose? onClose;
+  BOnExpose? onExpose;
+
+  FlutterBaiduAdNativeCallBack(
+      {this.onShow, this.onFail, this.onClick,this.onClose,this.onExpose});
 }

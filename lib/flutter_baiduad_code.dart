@@ -45,6 +45,9 @@ class FlutterBaiduAdMethod {
 
   ///跳过
   static const String onSkip = "onSkip";
+
+  ///曝光
+  static const String onExpose = "onExpose";
 }
 
 

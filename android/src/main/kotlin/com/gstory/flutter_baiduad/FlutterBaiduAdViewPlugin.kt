@@ -1,6 +1,7 @@
 package com.gstory.flutter_baiduad
 
 import android.app.Activity
+import android.src.main.kotlin.com.gstory.flutter_baiduad.splash.NativeAdViewFactory
 import android.src.main.kotlin.com.gstory.flutter_baiduad.splash.SplashAdViewFactory
 import com.gstory.flutter_baiduad.banner.BannerAdViewFactory
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -17,7 +18,7 @@ object FlutterBaiduAdViewPlugin {
         binding.platformViewRegistry.registerViewFactory(FlutterBaiduAdConfig.bannerAdView, BannerAdViewFactory(binding.binaryMessenger, activity))
         //注册splash广告
         binding.platformViewRegistry.registerViewFactory(FlutterBaiduAdConfig.splashAdView, SplashAdViewFactory(binding.binaryMessenger,activity))
-//        //注册Express广告
-//        binding.platformViewRegistry.registerViewFactory(FlutterBaiduAdConfig.nativeExpressAdView, NativeExpressAdViewFactory(binding.binaryMessenger,activity))
+        //注册native广告
+        binding.platformViewRegistry.registerViewFactory(FlutterBaiduAdConfig.nativeAdView, NativeAdViewFactory(binding.binaryMessenger,activity))
     }
 }

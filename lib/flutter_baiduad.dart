@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_baiduad/banner/banner_ad_view.dart';
+import 'package:flutter_baiduad/native/native_ad_view.dart';
 import 'package:flutter_baiduad/splash/splash_ad_view.dart';
 
 part 'flutter_baiduad_callback.dart';
@@ -130,7 +131,7 @@ class FlutterBaiduad {
   /// [appSid] 支持动态设置APPSID，该信息可从移动联盟获得。
   /// [autoplay] 是否自动播放
   /// [viewWidth] 广告宽 单位dp
-  /// [viewHeight] 广告高  单位dp   宽高比应该为6.4:1
+  /// [viewHeight] 广告高  单位dp   推荐 20:3 宽高比，其它尺寸选择 7:3，3:2，2:1
   /// [FlutterTencentAdBannerCallBack]  广告回调
   ///
   static Widget bannerAdView(
@@ -190,6 +191,38 @@ class FlutterBaiduad {
       limitClick: limitClick ?? false,
       displayClick: displayClick ?? true,
       popDialogDownLoad: popDialogDownLoad ?? true,
+      callBack: callBack,
+    );
+  }
+
+  ///
+  /// # 信息流广告
+  /// [androidId] android广告ID
+  /// [iosId] ios广告ID
+  /// [appSid] 支持动态设置APPSID，该信息可从移动联盟获得。
+  /// [isCacheVideo] 是否wifi缓存视频物料
+  /// [timeOut] 超时
+  /// [viewWidth] 广告宽 单位dp
+  /// [viewHeight] 广告高  单位dp
+  /// [FlutterBaiduAdNativeCallBack]  广告回调
+  ///
+  static Widget nativeAdView(
+      {required String androidId,
+        required String iosId,
+        String? appSid,
+        bool? isCacheVideo,
+        int? timeOut,
+        required double viewWidth,
+        required double viewHeight,
+        FlutterBaiduAdNativeCallBack? callBack}) {
+    return NativeAdView(
+      androidId: androidId,
+      iosId: iosId,
+      appSid: appSid ?? "",
+      isCacheVideo: isCacheVideo ?? false,
+      timeOut: timeOut ?? 5000,
+      viewWidth: viewWidth,
+      viewHeight: viewHeight,
       callBack: callBack,
     );
   }

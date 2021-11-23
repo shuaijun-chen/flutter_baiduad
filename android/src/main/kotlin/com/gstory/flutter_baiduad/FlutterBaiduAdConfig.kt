@@ -15,6 +15,6 @@ class FlutterBaiduAdConfig {
         //SplashAdView
         const val splashAdView = "com.gstory.flutter_baiduad/SplashAdView"
         //NativeExpressADView
-        const val nativeExpressAdView = "com.gstory.flutter_baiduad/NativeExpressAdView"
+        const val nativeAdView = "com.gstory.flutter_baiduad/NativeAdView"
     }
 }
