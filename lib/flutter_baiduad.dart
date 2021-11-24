@@ -159,8 +159,6 @@ class FlutterBaiduad {
   /// [iosId] ios广告ID
   /// [appSid] 支持动态设置APPSID，该信息可从移动联盟获得。
   /// [fetchDelay] 请求超时时间 默认超时时间为4200，单位：毫秒
-  /// [viewWidth] 广告宽 单位dp
-  /// [viewHeight] 广告高  单位dp
   /// [displayDownloadInfo] 是否显示下载类广告的“隐私”、“权限”等字段 默认值为true
   /// [limitClick] 是否限制点击区域，默认不限制
   /// [displayClick] 是否展示点击引导按钮，默认不展示，若设置可限制点击区域，则此选项默认打开
@@ -173,8 +171,6 @@ class FlutterBaiduad {
         required String iosId,
         String? appSid,
         int? fetchDelay,
-        required double viewWidth,
-        required double viewHeight,
         bool? displayDownloadInfo,
         bool? limitClick,
         bool? displayClick,
@@ -185,8 +181,6 @@ class FlutterBaiduad {
       iosId: iosId,
       appSid: appSid ?? "",
       fetchDelay: fetchDelay ?? 4200,
-      viewWidth: viewWidth,
-      viewHeight: viewHeight,
       displayDownloadInfo: displayDownloadInfo ?? true,
       limitClick: limitClick ?? false,
       displayClick: displayClick ?? true,
@@ -225,5 +219,33 @@ class FlutterBaiduad {
       viewHeight: viewHeight,
       callBack: callBack,
     );
+  }
+
+  ///
+  /// # 预加载插屏广告（百度优选）
+  ///
+  /// [androidId] android广告ID
+  ///
+  /// [iosId] ios广告ID
+  ///
+  ///  [isFullScreen] 是否全屏
+  ///
+  static Future<bool> loadInterstitialAd({
+    required String androidId,
+    required String iosId,
+    required bool isFullScreen,
+  }) async {
+    return await _channel.invokeMethod("loadInterstitialAd", {
+      "androidId": androidId,
+      "iosId": iosId,
+      "isFullScreen": isFullScreen,
+    });
+  }
+
+  ///
+  /// # 显示插屏广告（百度优选）
+  ///
+  static Future<bool> showInterstitialAd() async {
+    return await _channel.invokeMethod("showInterstitialAd", {});
   }
 }

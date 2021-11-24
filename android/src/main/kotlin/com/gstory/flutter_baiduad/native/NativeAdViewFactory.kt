@@ -2,8 +2,7 @@ package android.src.main.kotlin.com.gstory.flutter_baiduad.splash
 
 import android.app.Activity
 import android.content.Context
-import com.gstory.flutter_baiduad.splash.SplashAdView
-import com.gstory.native.NativeAdView
+import com.gstory.flutter_baiduad.native.NativeAdView
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView

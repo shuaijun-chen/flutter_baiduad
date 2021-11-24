@@ -13,8 +13,6 @@ class SplashAdView extends StatefulWidget {
   final String iosId;
   final String? appSid;
   final int? fetchDelay;
-  final double viewWidth;
-  final double viewHeight;
   final bool? displayDownloadInfo;
   final bool? limitClick;
   final bool? displayClick;
@@ -27,8 +25,6 @@ class SplashAdView extends StatefulWidget {
       required this.iosId,
       this.appSid,
       this.fetchDelay,
-      required this.viewWidth,
-      required this.viewHeight,
       this.displayDownloadInfo,
       this.limitClick,
       this.displayClick,
@@ -42,7 +38,7 @@ class SplashAdView extends StatefulWidget {
 
 class _SplashAdViewState extends State<SplashAdView> {
 
-  String _viewType = "com.gstory.flutter_tencentad/SplashAdView";
+  final String _viewType = "com.gstory.flutter_baiduad/SplashAdView";
 
   MethodChannel? _channel;
 
@@ -73,6 +69,7 @@ class _SplashAdViewState extends State<SplashAdView> {
             "limitClick": widget.limitClick,
             "displayClick": widget.displayClick,
             "popDialogDownLoad": widget.popDialogDownLoad,
+            "fetchDelay":widget.fetchDelay
           },
           onPlatformViewCreated: _registerChannel,
           creationParamsCodec: const StandardMessageCodec(),

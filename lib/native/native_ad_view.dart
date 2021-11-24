@@ -42,10 +42,17 @@ class _NativeAdViewState extends State<NativeAdView> {
   //广告是否显示
   bool _isShowAd = true;
 
+  double _width = 0;
+  double _height = 0;
+
   @override
   void initState() {
     super.initState();
-    _isShowAd = true;
+    setState(() {
+      _isShowAd = true;
+      _width = widget.viewWidth;
+      _height = widget.viewHeight;
+    });
   }
 
   @override
@@ -55,8 +62,8 @@ class _NativeAdViewState extends State<NativeAdView> {
     }
     if (defaultTargetPlatform == TargetPlatform.android) {
       return SizedBox(
-        width: widget.viewWidth,
-        height: widget.viewHeight,
+        width: _width,
+        height: _height,
         child: AndroidView(
           viewType: _viewType,
           creationParams: {
@@ -73,8 +80,8 @@ class _NativeAdViewState extends State<NativeAdView> {
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return SizedBox(
-        width: widget.viewWidth,
-        height: widget.viewHeight,
+        width: _width,
+        height: _height,
         child: UiKitView(
           viewType: _viewType,
           creationParams: {
@@ -104,6 +111,13 @@ class _NativeAdViewState extends State<NativeAdView> {
     switch (call.method) {
       //显示广告
       case FlutterBaiduAdMethod.onShow:
+        Map map = call.arguments;
+        if (mounted) {
+          setState(() {
+            _width = (map["width"]).toDouble();
+            _height = (map["height"]).toDouble();
+          });
+        }
         widget.callBack?.onShow!();
         break;
       //广告加载失败
@@ -132,6 +146,15 @@ class _NativeAdViewState extends State<NativeAdView> {
           });
         }
         widget.callBack?.onClose!();
+        break;
+     //不感兴趣
+      case FlutterBaiduAdMethod.onDisLike:
+        if (mounted) {
+          setState(() {
+            _isShowAd = false;
+          });
+        }
+        widget.callBack?.onDisLike!();
         break;
     }
   }

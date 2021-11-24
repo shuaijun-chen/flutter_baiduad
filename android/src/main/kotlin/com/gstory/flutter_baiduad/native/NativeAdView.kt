@@ -1,7 +1,7 @@
-package com.gstory.native
+package com.gstory.flutter_baiduad.native
 
 import android.app.Activity
-import android.util.Log
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -44,13 +44,30 @@ class NativeAdView(var activity: Activity,
         mContainer = FrameLayout(activity)
         mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
         mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
-        channel = MethodChannel(messenger, FlutterBaiduAdConfig.splashAdView + "_" + id)
+        channel = MethodChannel(messenger, FlutterBaiduAdConfig.nativeAdView + "_" + id)
         loadNativeAdView()
     }
 
     override fun getView(): View {
         return mContainer!!
     }
+
+    /**
+     * 将px值转换为dip或dp值，保证尺寸大小不变
+     * @param pxValue
+     * @return
+     */
+    fun dip2px(context: Context, dpValue: Float): Int {
+        val scale: Float = context.resources.displayMetrics.density //屏幕密度
+        return (dpValue * scale + 0.5f).toInt() //加0.5四舍五入
+    }
+
+    //px转化为dp
+    fun px2dip(context: Context, pxValue: Float): Int {
+        val scale = context.resources.displayMetrics.density
+        return (pxValue / scale + 0.5f).toInt()
+    }
+
 
     private fun loadNativeAdView() {
         mBaiduNativeManager = BaiduNativeManager(activity, codeId, isCacheVideo, timeOut)
@@ -94,6 +111,7 @@ class NativeAdView(var activity: Activity,
         var nativeResponse = p0?.get(0) as XAdNativeResponse?
         nativeResponse?.setAdDislikeListener {
             LogUtil.d("$TAG 信息流广告点击了负反馈渠道")
+            channel.invokeMethod("onDisLike", "")
         }
         feedView.setAdData(nativeResponse)
         var width = feedView.adContainerWidth
@@ -134,7 +152,9 @@ class NativeAdView(var activity: Activity,
                 LogUtil.d("$TAG 信息流广告联盟官网点击回调")
             }
         })
-        channel.invokeMethod("onShow", "")
+        LogUtil.d("$TAG 信息流显示 $width  $height")
+        val map: MutableMap<String, Any?> = mutableMapOf("width" to px2dip(activity, width.toFloat()), "height" to px2dip(activity, height.toFloat()))
+        channel.invokeMethod("onShow", map)
     }
 
     //广告请求失败

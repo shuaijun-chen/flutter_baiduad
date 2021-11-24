@@ -48,6 +48,9 @@ class FlutterBaiduAdMethod {
 
   ///曝光
   static const String onExpose = "onExpose";
+
+  ///不感兴趣
+  static const String onDisLike = "onDisLike";
 }
 
 

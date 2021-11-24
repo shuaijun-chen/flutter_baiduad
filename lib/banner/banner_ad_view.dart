@@ -45,6 +45,9 @@ class _BannerAdViewState extends State<BannerAdView> {
   void initState() {
     super.initState();
     _isShowAd = true;
+    setState(() {
+
+    });
   }
 
   @override
@@ -53,7 +56,7 @@ class _BannerAdViewState extends State<BannerAdView> {
       return Container();
     }
     if (defaultTargetPlatform == TargetPlatform.android) {
-      return Container(
+      return SizedBox(
         width: widget.viewWidth,
         height: widget.viewHeight,
         child: AndroidView(
@@ -70,7 +73,7 @@ class _BannerAdViewState extends State<BannerAdView> {
         ),
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-      return Container(
+      return SizedBox(
         width: widget.viewWidth,
         height: widget.viewHeight,
         child: UiKitView(

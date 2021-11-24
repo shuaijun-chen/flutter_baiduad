@@ -36,6 +36,9 @@ typedef BOnUnReady = void Function();
 typedef BOnVerify = void Function(
     bool verify, String rewardName, int rewardAmount);
 
+///不感兴趣
+typedef BOnDisLike = void Function();
+
 ///激励广告回调
 class FlutterBaiduAdRewardCallBack {
   BOnShow? onShow;
@@ -69,7 +72,7 @@ class FlutterBaiduAdBannerCallBack {
   BOnClose? onClose;
 
   FlutterBaiduAdBannerCallBack(
-      {this.onShow, this.onFail, this.onClick,this.onClose});
+      {this.onShow, this.onFail, this.onClick, this.onClose});
 }
 
 ///splash广告回调
@@ -80,17 +83,43 @@ class FlutterBaiduAdSplashCallBack {
   BOnClose? onClose;
 
   FlutterBaiduAdSplashCallBack(
-      {this.onShow, this.onFail, this.onClick,this.onClose});
+      {this.onShow, this.onFail, this.onClick, this.onClose});
 }
 
-///splash广告回调
+///native广告回调
 class FlutterBaiduAdNativeCallBack {
   BOnShow? onShow;
   BOnFail? onFail;
   BOnClick? onClick;
   BOnClose? onClose;
   BOnExpose? onExpose;
+  BOnDisLike? onDisLike;
 
   FlutterBaiduAdNativeCallBack(
-      {this.onShow, this.onFail, this.onClick,this.onClose,this.onExpose});
+      {this.onShow,
+      this.onFail,
+      this.onClick,
+      this.onClose,
+      this.onExpose,
+      this.onDisLike});
+}
+
+///插屏广告回调
+class FlutterBaiduAdInteractionCallBack {
+  BOnShow? onShow;
+  BOnClick? onClick;
+  BOnClose? onClose;
+  BOnFail? onFail;
+  BOnReady? onReady;
+  BOnUnReady? onUnReady;
+  BOnExpose? onExpose;
+
+  FlutterBaiduAdInteractionCallBack(
+      {this.onShow,
+      this.onClick,
+      this.onClose,
+      this.onFail,
+      this.onReady,
+      this.onUnReady,
+      this.onExpose});
 }

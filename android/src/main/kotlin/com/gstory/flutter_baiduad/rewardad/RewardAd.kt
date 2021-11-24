@@ -1,10 +1,12 @@
 package com.gstory.flutter_baiduad.rewardad
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.baidu.mobads.sdk.api.RewardVideoAd
 import com.gstory.flutter_baiduad.FlutterBaiduAdEventPlugin
 import com.gstory.flutter_tencentad.LogUtil
 
+@SuppressLint("StaticFieldLeak")
 object RewardAd : RewardVideoAd.RewardVideoAdListener {
     private val TAG = "RewardAd"
     private lateinit var context: Context
@@ -31,7 +33,6 @@ object RewardAd : RewardVideoAd.RewardVideoAdListener {
         this.isShowDialog = params["isShowDialog"] as Boolean
         this.useRewardCountdown = params["useRewardCountdown"] as Boolean
         this.appSid = params["appSid"] as String
-        LogUtil.d("激励广告 $codeId $params")
         loadRewardVideoAd()
     }
 
@@ -46,7 +47,9 @@ object RewardAd : RewardVideoAd.RewardVideoAdListener {
         //设置自定义参数
         rewardVideoAd?.setExtraInfo(customData)
         //支持动态设置APPSID，该信息可从移动联盟获得
-        rewardVideoAd?.setAppSid(appSid)
+        if(!appSid.isNullOrEmpty()){
+            rewardVideoAd?.setAppSid(appSid)
+        }
         rewardVideoAd?.load()
     }
 

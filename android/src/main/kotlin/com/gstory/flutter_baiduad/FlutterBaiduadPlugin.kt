@@ -2,6 +2,7 @@ package com.gstory.flutter_baiduad
 
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.util.Log
 import androidx.annotation.NonNull
 import com.baidu.mobads.sdk.api.AdSettings
@@ -22,6 +23,13 @@ import com.gstory.flutter_baiduad.rewardad.RewardAd
 import com.gstory.flutter_tencentad.LogUtil
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
+import android.app.ActivityManager
+import android.app.ActivityManager.RunningAppProcessInfo
+import android.os.Process
+import android.app.Application.getProcessName
+import android.webkit.WebView
+import com.gstory.flutter_baiduad.interstitialad.ExpressInsertAd
+import com.gstory.flutter_baiduad.interstitialad.InsertAd
 
 
 /** FlutterBaiduadPlugin */
@@ -60,10 +68,21 @@ class FlutterBaiduadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         Log.e("FlutterUnionadPlugin->", "onDetachedFromActivity")
     }
 
+    private fun getProcessName(context: Context?): String? {
+        if (context == null) return null
+        val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (processInfo in manager.runningAppProcesses) {
+            if (processInfo.pid == Process.myPid()) {
+                return processInfo.processName
+            }
+        }
+        return null
+    }
+
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         //注册初始化
         if (call.method == "register") {
-            val appId = call.argument<String>("androidId")
+            val appId = call.argument<String>("androidAppId")
             val appName = call.argument<String>("appName")
             val debug = call.argument<Boolean>("debug")
             val bdAdConfig = BDAdConfig.Builder()
@@ -91,28 +110,41 @@ class FlutterBaiduadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             result.success(AdSettings.getSDKVersion())
         } else if (call.method == "getOAID") {
             //获取 oaid
-            MdidSdkHelper.InitSdk(applicationContext, true, object : IIdentifierListener {
-                override fun OnSupport(p0: Boolean, p1: IdSupplier?) {
-                    if (p1 == null) {
-                        LogUtil.d("MdidSdkHelper初始化失败")
-                        result.success("")
-                        return
+            try {
+                MdidSdkHelper.InitSdk(applicationContext, true, object : IIdentifierListener {
+                    override fun OnSupport(p0: Boolean, p1: IdSupplier?) {
+                        if (p1 == null) {
+                            LogUtil.d("MdidSdkHelper初始化失败")
+                            result.success("")
+                            return
+                        }
+                        var oaid = p1.oaid
+                        mActivity!!.runOnUiThread(Runnable {
+                            result.success(oaid)
+                        })
+                        var vaid = p1.vaid
+                        var aaid = p1.aaid
+                        LogUtil.d("$p1")
                     }
-                    var oaid = p1.oaid
-                    mActivity!!.runOnUiThread(Runnable {
-                        result.success(oaid)
-                    })
-                    var vaid = p1.vaid
-                    var aaid = p1.aaid
-                    LogUtil.d("oaid=$oaid  vaid=$vaid  aaid=$aaid")
-                }
-            })
+                })
+            }catch (e : Exception){
+                result.success("")
+            }
             //预加载激励广告
         } else if (call.method == "loadRewardAd") {
             RewardAd.init(applicationContext!!, call.arguments as Map<*, *>)
             //展示激励广告
         } else if (call.method == "showRewardAd") {
             RewardAd.showAd()
+            result.success(true)
+            //预加载插屏广告
+        } else if (call.method == "loadInterstitialAd") {
+            ExpressInsertAd.init(mActivity!!,call.arguments as Map<*, *>)
+            result.success(true)
+            //展示插屏广告
+        } else if (call.method == "showInterstitialAd") {
+            ExpressInsertAd.showInterstitialAd()
+
             result.success(true)
         }
     }
