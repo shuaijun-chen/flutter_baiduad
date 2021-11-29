@@ -98,7 +98,7 @@ class FlutterBaiduadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             LogUtil.setShow(debug!!)
             result.success(true)
             //隐私敏感权限API&限制个性化广告推荐
-        } else if (call.method == "andridPrivacy") {
+        } else if (call.method == "privacy") {
             MobadsPermissionSettings.setPermissionReadDeviceID(call.argument<Boolean>("readDeviceID")!!)
             MobadsPermissionSettings.setPermissionLocation(call.argument<Boolean>("location")!!)
             MobadsPermissionSettings.setPermissionStorage(call.argument<Boolean>("storage")!!)

@@ -80,6 +80,7 @@ class _BannerAdViewState extends State<BannerAdView> {
           viewType: _viewType,
           creationParams: {
             "iosId": widget.iosId,
+            "appSid": widget.appSid,
             "viewWidth": widget.viewWidth,
             "viewHeight": widget.viewHeight,
           },

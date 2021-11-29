@@ -1,15 +1,56 @@
 #import "FlutterBaiduadPlugin.h"
-#if __has_include(<flutter_baiduad/flutter_baiduad-Swift.h>)
-#import <flutter_baiduad/flutter_baiduad-Swift.h>
-#else
-// Support project import fallback if the generated compatibility header
-// is not copied when this plugin is created as a library.
-// https://forums.swift.org/t/swift-static-libraries-dont-copy-generated-objective-c-header/19816
-#import "flutter_baiduad-Swift.h"
-#endif
+#import <BaiduMobAdSDK/BaiduMobAdCommonConfig.h>
+#import <BaiduMobAdSDK/BaiduMobAdSetting.h>
+#import "BannerView.h"
+#import "RewardAd.h"
+#import "FlutterBaiduadEvent.h"
+#import "BaiduAdManager.h"
+#import "SplashAd.h"
+#import "InsertAd.h"
 
 @implementation FlutterBaiduadPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  [SwiftFlutterBaiduadPlugin registerWithRegistrar:registrar];
+    FlutterMethodChannel* channel = [FlutterMethodChannel
+                                     methodChannelWithName:@"flutter_baiduad"
+                                     binaryMessenger:[registrar messenger]];
+    FlutterBaiduadPlugin* instance = [[FlutterBaiduadPlugin alloc] init];
+    [registrar addMethodCallDelegate:instance channel:channel];
+    //注册event
+    [[FlutterBaiduadEvent sharedInstance]  initEvent:registrar];
+
+    //注册banner
+    [registrar registerViewFactory:[[BannerViewFactory alloc] initWithMessenger:registrar.messenger] withId:@"com.gstory.flutter_baiduad/BannerAdView"];
+    //注册splash
+    [registrar registerViewFactory:[[SplashAdFactory alloc] initWithMessenger:registrar.messenger] withId:@"com.gstory.flutter_baiduad/SplashAdView"];
 }
+
+- (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
+    if ([@"register" isEqualToString:call.method]) {
+        NSString *appId = call.arguments[@"iosAppId"];
+        [[BaiduAdManager sharedInstance] initAppId:appId];
+        result(@YES);
+    }else if([@"getSDKVersion" isEqualToString:call.method]){
+        result(SDK_VERSION_IN_MSSP);
+    }else if([@"privacy" isEqualToString:call.method]){
+        BOOL readDeviceID = [call.arguments[@"readDeviceID"] boolValue];
+        BOOL personalAds = [call.arguments[@"personalAds"] boolValue];
+        [[BaiduMobAdSetting sharedInstance] setBDPermissionEnable:readDeviceID];
+        [[BaiduMobAdSetting sharedInstance] setLimitBaiduPersonalAds:personalAds];
+        result(@YES);
+    }else if([@"loadRewardAd" isEqualToString:call.method]){
+        RewardAd *rewardAd = [RewardAd sharedInstance];
+        [rewardAd initAd:call.arguments];
+    }else if([@"showRewardAd" isEqualToString:call.method]){
+        [[RewardAd sharedInstance] showAd];
+        //加载插屏广告
+    }else if([@"loadInterstitialAd" isEqualToString:call.method]){
+        [[InsertAd sharedInstance] initAd:call.arguments];
+        //展示插屏广告
+    }else if([@"showInterstitialAd" isEqualToString:call.method]){
+        [[InsertAd sharedInstance] showAd];
+    } else {
+        result(FlutterMethodNotImplemented);
+    }
+}
+
 @end

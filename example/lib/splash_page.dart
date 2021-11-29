@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
             //android广告ID
             androidId: "7792007",
             //ios广告ID
-            iosId: "7792007",
+            iosId: "7803231",
             //请求超时时间 默认超时时间为4200，单位：毫秒
             fetchDelay: 3000,
             //是否显示下载类广告的“隐私”、“权限”等字段 默认值为true

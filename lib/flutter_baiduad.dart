@@ -38,14 +38,14 @@ class FlutterBaiduad {
   /// [storage] 读写外部存储权限
   /// [personalAds] 设置限制个性化广告推荐
   ///
-  static Future<bool> andridPrivacy({
+  static Future<bool> privacy({
     bool? readDeviceID,
     bool? appList,
     bool? location,
     bool? storage,
     bool? personalAds,
   }) async {
-    return await _channel.invokeMethod("andridPrivacy", {
+    return await _channel.invokeMethod("privacy", {
       "readDeviceID": readDeviceID ?? false,
       "appList": appList ?? false,
       "location": location ?? false,

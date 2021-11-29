@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter_baiduad/flutter_baiduad.dart';
-import 'package:flutter_baiduad_example/banner_page.dart';
-import 'package:flutter_baiduad_example/splash_page.dart';
 
+import 'banner_page.dart';
 import 'native_page.dart';
+import 'splash_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -85,9 +85,10 @@ class _HomePageState extends State<HomePage> {
           onShow: () {
             print("插屏广告显示了");
           },
-          onReady: () {
+          onReady: () async{
             print("插屏广告准备就绪");
-            FlutterBaiduad.showInterstitialAd();
+            //展示广告
+            await FlutterBaiduad.showInterstitialAd();
           },
           onUnReady: () {
             print("插屏广告未准备就绪");
@@ -100,29 +101,29 @@ class _HomePageState extends State<HomePage> {
 
   //注册
   void _initRegister() async {
-    _oaid = await FlutterBaiduad.getOAID();
+    if(Platform.isAndroid){
+      _oaid = await FlutterBaiduad.getOAID();
+    }
     _isRegister = await FlutterBaiduad.register(
       androidAppId: "b423d90d",
-      //穿山甲广告 Android appid 必填
-      iosAppId: "b423d90d",
+      //百青藤广告 Android appid 必填
+      iosAppId: "a6b7fed6",
       //是否打印日志 发布时改为false
       debug: true,
     );
     //隐私敏感权限API&限制个性化广告推荐
-    if (Platform.isAndroid) {
-      await FlutterBaiduad.andridPrivacy(
-        //读取设备ID的权限（建议授权）
-        readDeviceID: false,
-        //读取已安装应用列表权限（建议授权）
-        appList: false,
-        //读取粗略地理位置权限
-        location: false,
-        //读写外部存储权限
-        storage: false,
-        //设置限制个性化广告推荐
-        personalAds: false,
-      );
-    }
+    await FlutterBaiduad.privacy(
+      //android读取设备ID的权限（建议授权）  ios是否新的设备标志能力
+      readDeviceID: false,
+      //读取已安装应用列表权限（建议授权）
+      appList: false,
+      //读取粗略地理位置权限
+      location: false,
+      //读写外部存储权限
+      storage: false,
+      //设置限制个性化广告推荐
+      personalAds: false,
+    );
     _sdkVersion = await FlutterBaiduad.getSDKVersion();
     setState(() {});
   }
@@ -150,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                     //android广告id
                     androidId: "7792010",
                     //ios广告id
-                    iosId: "7792010",
+                    iosId: "7800949",
                     //支持动态设置APPSID，该信息可从移动联盟获得
                     appSid: "",
                     //用户id
@@ -226,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () async {
                   FlutterBaiduad.loadInterstitialAd(
                       androidId: "7792008",
-                      iosId: "7792008",
+                      iosId: "7803486",
                       isFullScreen: false);
                 },
               ),
