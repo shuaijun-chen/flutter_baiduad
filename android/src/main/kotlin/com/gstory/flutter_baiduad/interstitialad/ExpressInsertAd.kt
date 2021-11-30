@@ -90,7 +90,6 @@ object ExpressInsertAd : ExpressInterstitialListener {
     //	广告曝光成功
     override fun onADExposed() {
         LogUtil.e("$TAG  模版插屏曝光")
-        LogUtil.e("$TAG  插屏广告点击")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "interactAd", "onAdMethod" to "onExpose")
         FlutterBaiduAdEventPlugin.sendContent(map)
     }

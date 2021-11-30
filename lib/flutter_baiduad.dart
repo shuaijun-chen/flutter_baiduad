@@ -248,4 +248,25 @@ class FlutterBaiduad {
   static Future<bool> showInterstitialAd() async {
     return await _channel.invokeMethod("showInterstitialAd", {});
   }
+
+  ///
+  /// # 预加载全屏视频广告
+  ///
+  /// [androidId] android广告ID
+  ///
+  /// [iosId] ios广告ID
+  ///
+  ///  [useSurfaceView] 是否使用SurfaceView，默认使用TextureView
+  ///
+  static Future<bool> loadFullVideoAd({
+    required String androidId,
+    required String iosId,
+    required bool useSurfaceView,
+  }) async {
+    return await _channel.invokeMethod("loadFullVideoAd", {
+      "androidId": androidId,
+      "iosId": iosId,
+      "useSurfaceView": useSurfaceView,
+    });
+  }
 }

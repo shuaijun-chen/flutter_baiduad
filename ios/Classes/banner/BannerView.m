@@ -55,7 +55,8 @@
 
 - (instancetype)initWithWithFrame:(CGRect)frame viewIdentifier:(int64_t)viewId arguments:(id)args binaryMessenger:(NSObject<FlutterBinaryMessenger> *)messenger{
     if ([super init]) {
-        self.container= [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 50)];
+        self.container= [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 100)];
+        self.container.backgroundColor = [UIColor brownColor];
         _viewId = viewId;
         _appSid = args[@"appSid"];
         _codeId = args[@"iosId"];
@@ -71,10 +72,10 @@
     //load横幅
     [_bdBannerView removeFromSuperview];
     _bdBannerView = [[BaiduMobAdView alloc] init];
+    _bdBannerView.frame = CGRectMake(0, 0, 300, 100);
     _bdBannerView.AdUnitTag = _codeId;
     _bdBannerView.AdType = BaiduMobAdViewTypeBanner;
     _bdBannerView.delegate = self;
-    _bdBannerView.frame = CGRectMake(0, 0, 300, 50);
     [_bdBannerView start];
 }
 

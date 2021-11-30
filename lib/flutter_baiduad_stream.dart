@@ -26,9 +26,7 @@ class FlutterBaiduAdStream {
       FlutterBaiduAdInteractionCallBack? flutterBaiduAdInteractionCallBack}) {
     StreamSubscription _adStream =
         baiduAdEventEvent.receiveBroadcastStream().listen((event) {
-          print("激励广告-------》$event");
       switch (event[FlutterBaiduAdType.adType]) {
-
         ///激励广告
         case FlutterBaiduAdType.rewardAd:
           switch (event[FlutterBaiduAdMethod.onAdMethod]) {
@@ -64,7 +62,7 @@ class FlutterBaiduAdStream {
           }
           break;
 
-        ///激励广告
+        ///插屏广告
         case FlutterBaiduAdType.interactAd:
           switch (event[FlutterBaiduAdMethod.onAdMethod]) {
             case FlutterBaiduAdMethod.onShow:

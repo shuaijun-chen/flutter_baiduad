@@ -57,17 +57,15 @@ class BannerAdView(var activity: Activity,
         mContainer = FrameLayout(activity)
         mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
         mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
-//        adView = AdView(activity, null, autoplay, AdSize.Banner, codeId)
-        adView = AdView(activity, codeId)
+        adView = AdView(activity, null, autoplay, AdSize.Banner, codeId)
+        adView?.layoutParams = ViewGroup.LayoutParams(viewWidth.toInt(),viewHeight.toInt())
+//        adView = AdView(activity, codeId)
         //支持动态设置APPSID，该信息可从移动联盟获得
         if (!appSid.isNullOrEmpty()) {
             adView?.setAppSid(appSid)
         }
         adView?.setListener(this)
         mContainer?.removeAllViews()
-//        val rllp: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(viewWidth.toInt(), viewHeight.toInt())
-//        rllp.addRule(RelativeLayout.ALIGN_PARENT_TOP)
-//        mContainer?.addView(adView, rllp)
         mContainer?.addView(adView)
     }
 
@@ -81,6 +79,7 @@ class BannerAdView(var activity: Activity,
             LogUtil.e("$TAG  Banner广告加载失败 adView不存在或已销毁")
             var map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to "adView不存在或已销毁")
             channel.invokeMethod("onFail", map)
+            dispose()
             return
         }
     }
@@ -102,6 +101,7 @@ class BannerAdView(var activity: Activity,
         LogUtil.e("$TAG  Banner广告加载失败 $p0")
         var map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to p0)
         channel.invokeMethod("onFail", map)
+        dispose()
     }
 
     override fun onAdSwitch() {
@@ -112,6 +112,7 @@ class BannerAdView(var activity: Activity,
     override fun onAdClose(p0: JSONObject?) {
         LogUtil.e("$TAG  Banner广告关闭")
         channel.invokeMethod("onClose", "")
+        dispose()
     }
 
     override fun dispose() {

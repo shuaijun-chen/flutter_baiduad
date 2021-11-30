@@ -110,6 +110,7 @@
     GLog(@"开屏广告展示失败 %d",reason);
     NSDictionary *dictionary = @{@"code":@(0),@"message":@"广告展示失败"};
     [_channel invokeMethod:@"onClose" arguments:dictionary result:nil];
+    [self.splash stop];
 }
 
 /**
@@ -126,6 +127,7 @@
 - (void)splashDidDismissScreen:(BaiduMobAdSplash *)splash{
     GLog(@"开屏广告展示结束");
     [_channel invokeMethod:@"onClose" arguments:nil result:nil];
+    [self.splash stop];
 }
 
 /**
@@ -164,6 +166,7 @@
     GLog(@"开屏广告请求失败");
     NSDictionary *dictionary = @{@"code":@(0),@"message":@"开屏广告请求失败"};
     [_channel invokeMethod:@"onClose" arguments:dictionary result:nil];
+    [self.splash stop];
 }
 
 @end

@@ -226,11 +226,23 @@ class _HomePageState extends State<HomePage> {
                 child: const Text('插屏广告'),
                 onPressed: () async {
                   FlutterBaiduad.loadInterstitialAd(
-                      androidId: "7792008",
+                      androidId: "7794069",
                       iosId: "7803486",
                       isFullScreen: false);
                 },
               ),
+              //全屏广告
+              // MaterialButton(
+              //   color: Colors.blue,
+              //   textColor: Colors.white,
+              //   child: const Text('全屏视频广告（暂时不启用）'),
+              //   onPressed: () async {
+              //     FlutterBaiduad.loadFullVideoAd(
+              //         androidId: "7804637",
+              //         iosId: "7803486",
+              //         useSurfaceView: false);
+              //   },
+              // ),
             ],
           ),
         ),

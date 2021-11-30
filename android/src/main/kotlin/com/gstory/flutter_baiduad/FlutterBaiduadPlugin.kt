@@ -28,6 +28,7 @@ import android.app.ActivityManager.RunningAppProcessInfo
 import android.os.Process
 import android.app.Application.getProcessName
 import android.webkit.WebView
+import com.gstory.flutter_baiduad.fullvideo.FullVideoAd
 import com.gstory.flutter_baiduad.interstitialad.ExpressInsertAd
 import com.gstory.flutter_baiduad.interstitialad.InsertAd
 
@@ -144,7 +145,14 @@ class FlutterBaiduadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             //展示插屏广告
         } else if (call.method == "showInterstitialAd") {
             ExpressInsertAd.showInterstitialAd()
-
+            result.success(true)
+            //预加载插屏广告
+        } else if (call.method == "loadFullVideoAd") {
+            FullVideoAd.init(mActivity!!,call.arguments as Map<*, *>)
+            result.success(true)
+            //展示插屏广告
+        } else if (call.method == "showFullVideoAd") {
+            FullVideoAd.showFullVideoAd()
             result.success(true)
         }
     }
