@@ -9,8 +9,6 @@ flutter_baiduad是一款集成了百度广告(百青藤)Android和iOS SDK的Flut
 
 由于百青藤需要上架应用才能使用广告，所以demo不能直接运行
 
-## 《测试中 请勿在线上项目中使用！！！》
-
 ## 官方文档
 * [Android](https://union.baidu.com/miniappblog/2020/12/01/newAndroidSDK/)
 * [IOS](https://union.baidu.com/miniappblog/2020/08/11/iOSSDK/)
@@ -32,26 +30,40 @@ flutter_baiduad是一款集成了百度广告(百青藤)Android和iOS SDK的Flut
 ```dart
 wechat_kit:
     git:
-    url: https://github.com/gstory0404/flutter_baiduad.git
-    ref: master
+      url: https://github.com/gstory0404/flutter_baiduad.git
+      ref: master
 ```
 引入
 ```Dart
 import 'package:flutter_baiduad/flutter_baiduad.dart';
 ```
 #### 2、Android
-SDK(9.17)已配置插件中无需额外配置，只需要在android目录中AndroidManifest.xml配置
+SDK(9.202)已配置插件中无需额外配置，只需要在android目录中AndroidManifest.xml配置
 ```Java
 <manifest ···
     xmlns:tools="http://schemas.android.com/tools"
     ···>
+
+    <!-- SDK相关权限声明 -->
+    <!--  -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- targetSdkVersion >= 26 时需要配置此权限，否则无法进行安装app的动作 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- 如果有视频相关的广告且使用textureView播放，请务必添加，否则黑屏 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Android 11系统上，如果你的应用targetSdkVersion >= 30，需要配置权限QUERY_ALL_PACKAGES，SDK将通过此权限正常触发广告行为，并保证广告的正确投放。此权限需要在用户隐私文档中声明。 -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" /> <!-- Demo 内容联盟锁屏场景 从Android 9.0开始 创建前台Service -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- Demo 内容联盟锁屏场景 悬浮窗权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
   <application
         tools:replace="android:label">
 ```
 
 #### 3、IOS
 
-SDK(4.83)已配置插件中，其余根据文档配置。因为使用PlatformView，在Info.plist加入
+SDK(4.861)已配置插件中，其余根据文档配置。因为使用PlatformView，在Info.plist加入
 ```
  <key>io.flutter.embedded_views_preview</key>
     <true/>
@@ -87,6 +99,8 @@ await FlutterBaiduad.privacy(
         storage: false,
         //设置限制个性化广告推荐
         personalAds: false,
+        // ios 新标志能力，该能力默认开启，如果有监管或隐私要求，在app内配置是否开启该能力。
+        bDPermission: false,
       );
 ```
 
@@ -272,7 +286,10 @@ FlutterBaiduAdStream.initAdStream(
 |穿山甲广告插件|[flutter_unionad](https://github.com/gstory0404/flutter_unionad)|
 |腾讯优量汇广告插件|[flutter_tencentad](https://github.com/gstory0404/flutter_tencentad)|
 |聚合广告插件|[flutter_universalad](https://github.com/gstory0404/flutter_universalad)|
-|百青藤广告插件|[flutter_baiduad](https://github.com/gstory0404/flutter_baiduad)|
+|百度百青藤广告插件|[flutter_baiduad](https://github.com/gstory0404/flutter_baiduad)|
+|字节穿山甲内容合作插件|[flutter_pangrowth](https://github.com/gstory0404/flutter_pangrowth)|
+|文档预览插件|[file_preview](https://github.com/gstory0404/file_preview)|
+|滤镜|[gpu_image](https://github.com/gstory0404/gpu_image)|
 
 ## 联系方式
 * Email: gstory0404@gmail.com

@@ -16,8 +16,6 @@
     NSObject<FlutterBinaryMessenger>*_messenger;
 }
 
-
-
 - (instancetype)initWithMessenger:(NSObject<FlutterBinaryMessenger> *)messager{
     self = [super init];
     if (self) {
@@ -62,6 +60,8 @@
         _codeId = args[@"iosId"];
         _width =args[@"viewWidth"];
         _height =args[@"viewWidth"];
+        NSString* channelName = [NSString stringWithFormat:@"com.gstory.flutter_baiduad/BannerView_%lld", viewId];
+        _channel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:messenger];
         [self loadBannerAd];
     }
     return self;
@@ -113,6 +113,8 @@
 - (void)failedDisplayAd:(BaiduMobFailReason)reason{
     [self.bdBannerView removeFromSuperview];
     GLog(@"横幅广告: 加载失败 %d", reason);
+    NSDictionary *dictionary = @{@"code":@(0),@"message":@"广告展示失败"};
+    [_channel invokeMethod:@"onClose" arguments:dictionary result:nil];
 }
 
 
@@ -121,6 +123,7 @@
  */
 - (void)didAdImpressed{
     GLog(@"横幅广告: 展示了");
+    [_channel invokeMethod:@"onShow" arguments:nil result:nil];
 }
 
 /**
@@ -128,6 +131,7 @@
  */
 - (void)didAdClicked{
     GLog(@"横幅广告: 点击了");
+    [_channel invokeMethod:@"onClick" arguments:nil result:nil];
 }
 
 /**
@@ -142,6 +146,7 @@
  */
 - (void)didAdClose{
     GLog(@"横幅广告: 关闭");
+    [_channel invokeMethod:@"onClose" arguments:nil result:nil];
 }
 
 

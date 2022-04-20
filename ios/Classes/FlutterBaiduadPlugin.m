@@ -32,9 +32,9 @@
     }else if([@"getSDKVersion" isEqualToString:call.method]){
         result(SDK_VERSION_IN_MSSP);
     }else if([@"privacy" isEqualToString:call.method]){
-        BOOL readDeviceID = [call.arguments[@"readDeviceID"] boolValue];
+        BOOL bDPermission = [call.arguments[@"bDPermission"] boolValue];
         BOOL personalAds = [call.arguments[@"personalAds"] boolValue];
-        [[BaiduMobAdSetting sharedInstance] setBDPermissionEnable:readDeviceID];
+        [[BaiduMobAdSetting sharedInstance] setBDPermissionEnable:bDPermission];
         [[BaiduMobAdSetting sharedInstance] setLimitBaiduPersonalAds:personalAds];
         result(@YES);
     }else if([@"loadRewardAd" isEqualToString:call.method]){
@@ -47,7 +47,7 @@
         [[InsertAd sharedInstance] initAd:call.arguments];
         //展示插屏广告
     }else if([@"showInterstitialAd" isEqualToString:call.method]){
-        [[InsertAd sharedInstance] showAd];
+        [[InsertAd sharedInstance] showInsertAd];
     } else {
         result(FlutterMethodNotImplemented);
     }

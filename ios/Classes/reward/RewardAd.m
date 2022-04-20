@@ -79,8 +79,6 @@
  */
 - (void)rewardedAdLoadSuccess:(BaiduMobAdRewardVideo *)video{
     GLog(@"激励视频广告请求成功");
-    NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onReady"};
-    [[FlutterBaiduadEvent sharedInstance] sentEvent:dictionary];
 }
 
 /**
@@ -98,6 +96,8 @@
  */
 - (void)rewardedVideoAdLoaded:(BaiduMobAdRewardVideo *)video{
     GLog(@"视频缓存成功");
+    NSDictionary *dictionary = @{@"adType":@"rewardAd",@"onAdMethod":@"onReady"};
+    [[FlutterBaiduadEvent sharedInstance] sentEvent:dictionary];
 }
 
 /**

@@ -58,9 +58,9 @@ class SplashAdView(var activity: Activity,
         // 是否显示下载类广告的“隐私”、“权限”等字段（value为String类型） 默认值为true
         parameters.addExtra(SplashAd.KEY_DISPLAY_DOWNLOADINFO, displayDownloadInfo.toString())
         // 是否限制点击区域，默认不限制
-        parameters.addExtra(SplashAd.KEY_LIMIT_REGION_CLICK, limitClick.toString())
-        // 是否展示点击引导按钮，默认不展示，若设置可限制点击区域，则此选项默认打开
-        parameters.addExtra(SplashAd.KEY_DISPLAY_CLICK_REGION, displayClick.toString())
+//        parameters.addExtra(SplashAd.KEY_LIMIT_REGION_CLICK, limitClick.toString())
+//        // 是否展示点击引导按钮，默认不展示，若设置可限制点击区域，则此选项默认打开
+//        parameters.addExtra(SplashAd.KEY_DISPLAY_CLICK_REGION, displayClick.toString())
         // 用户点击开屏下载类广告时，是否弹出Dialog
         // 此选项设置为true的情况下，会覆盖掉 {SplashAd.KEY_DISPLAY_DOWNLOADINFO} 的设置
         parameters.addExtra(SplashAd.KEY_POPDIALOG_DOWNLOAD, popDialogDownLoad.toString())

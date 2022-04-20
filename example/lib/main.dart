@@ -123,6 +123,8 @@ class _HomePageState extends State<HomePage> {
       storage: false,
       //设置限制个性化广告推荐
       personalAds: false,
+      // ios 新标志能力，该能力默认开启，如果有监管或隐私要求，在app内配置是否开启该能力。
+      bDPermission: false,
     );
     _sdkVersion = await FlutterBaiduad.getSDKVersion();
     setState(() {});

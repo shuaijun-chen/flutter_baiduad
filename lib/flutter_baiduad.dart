@@ -37,20 +37,22 @@ class FlutterBaiduad {
   /// [location] 读取粗略地理位置权限
   /// [storage] 读写外部存储权限
   /// [personalAds] 设置限制个性化广告推荐
+  /// [bDPermission] ios 新标志能力，该能力默认开启，如果有监管或隐私要求，在app内配置是否开启该能力。
   ///
-  static Future<bool> privacy({
-    bool? readDeviceID,
-    bool? appList,
-    bool? location,
-    bool? storage,
-    bool? personalAds,
-  }) async {
+  static Future<bool> privacy(
+      {bool? readDeviceID,
+      bool? appList,
+      bool? location,
+      bool? storage,
+      bool? personalAds,
+      bool? bDPermission}) async {
     return await _channel.invokeMethod("privacy", {
-      "readDeviceID": readDeviceID ?? false,
-      "appList": appList ?? false,
-      "location": location ?? false,
-      "storage": storage ?? false,
-      "personalAds": personalAds ?? false,
+      "readDeviceID": readDeviceID ?? true,
+      "appList": appList ?? true,
+      "location": location ?? true,
+      "storage": storage ?? true,
+      "personalAds": personalAds ?? true,
+      "bDPermission": bDPermission ?? true
     });
   }
 
@@ -141,7 +143,7 @@ class FlutterBaiduad {
       bool? autoplay,
       required double viewWidth,
       required double viewHeight,
-        FlutterBaiduAdBannerCallBack? callBack}) {
+      FlutterBaiduAdBannerCallBack? callBack}) {
     return BannerAdView(
       androidId: androidId,
       iosId: iosId,
@@ -168,14 +170,14 @@ class FlutterBaiduad {
   ///
   static Widget splashAdView(
       {required String androidId,
-        required String iosId,
-        String? appSid,
-        int? fetchDelay,
-        bool? displayDownloadInfo,
-        bool? limitClick,
-        bool? displayClick,
-        bool? popDialogDownLoad,
-        FlutterBaiduAdSplashCallBack? callBack}) {
+      required String iosId,
+      String? appSid,
+      int? fetchDelay,
+      bool? displayDownloadInfo,
+      bool? limitClick,
+      bool? displayClick,
+      bool? popDialogDownLoad,
+      FlutterBaiduAdSplashCallBack? callBack}) {
     return SplashAdView(
       androidId: androidId,
       iosId: iosId,
@@ -202,13 +204,13 @@ class FlutterBaiduad {
   ///
   static Widget nativeAdView(
       {required String androidId,
-        required String iosId,
-        String? appSid,
-        bool? isCacheVideo,
-        int? timeOut,
-        required double viewWidth,
-        required double viewHeight,
-        FlutterBaiduAdNativeCallBack? callBack}) {
+      required String iosId,
+      String? appSid,
+      bool? isCacheVideo,
+      int? timeOut,
+      required double viewWidth,
+      required double viewHeight,
+      FlutterBaiduAdNativeCallBack? callBack}) {
     return NativeAdView(
       androidId: androidId,
       iosId: iosId,

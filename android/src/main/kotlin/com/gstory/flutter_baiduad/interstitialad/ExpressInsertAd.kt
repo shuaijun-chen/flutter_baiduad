@@ -34,9 +34,11 @@ object ExpressInsertAd : ExpressInterstitialListener {
     }
 
     //预加载插屏广告
-    fun loadInterstitialAd() {
+    private fun loadInterstitialAd() {
         interstitialAd = ExpressInterstitialAd(context, codeId)
         interstitialAd?.setLoadListener(this)
+        // 设置下载弹窗，默认为false
+        interstitialAd?.setDialogFrame(true);
         interstitialAd?.load()
     }
 
@@ -47,6 +49,7 @@ object ExpressInsertAd : ExpressInterstitialListener {
         if (interstitialAd == null || !interstitialAd?.isReady!!) {
             var map: MutableMap<String, Any?> = mutableMapOf("adType" to "interactAd", "onAdMethod" to "onUnReady")
             FlutterBaiduAdEventPlugin.sendContent(map)
+            LogUtil.e("$TAG  素材未准备好")
             return
         }
         interstitialAd?.show()

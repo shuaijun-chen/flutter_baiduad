@@ -89,6 +89,7 @@ class FlutterBaiduadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             val bdAdConfig = BDAdConfig.Builder()
                     .setAppName(appName)
                     .setAppsid(appId)
+                    .setHttps(true)
                     .setDialogParams(BDDialogParams.Builder()
                             .setDlDialogType(BDDialogParams.TYPE_BOTTOM_POPUP)
                             .setDlDialogAnimStyle(BDDialogParams.ANIM_STYLE_NONE)

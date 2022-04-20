@@ -34,32 +34,25 @@ class BannerAdView(var activity: Activity,
     private var adView: AdView? = null
 
     //广告所需参数
-    private var codeId: String
-    private var appSid: String?
-    private var autoplay: Boolean
-    private var viewWidth: Double
-    private var viewHeight: Double
+    private var codeId: String = params["androidId"] as String
+    private var appSid: String? = params["appSid"] as String
+    private var autoplay: Boolean = params["autoplay"] as Boolean
+    private var viewWidth: Double = params["viewWidth"] as Double
+    private var viewHeight: Double = params["viewHeight"] as Double
 
-    private var channel: MethodChannel
+    private var channel: MethodChannel = MethodChannel(messenger, FlutterBaiduAdConfig.bannerAdView + "_" + id)
 
     init {
-        codeId = params["androidId"] as String
-        appSid = params["appSid"] as String
-        autoplay = params["autoplay"] as Boolean
-        viewWidth = params["viewWidth"] as Double
-        viewHeight = params["viewHeight"] as Double
-        channel = MethodChannel(messenger, FlutterBaiduAdConfig.bannerAdView + "_" + id)
         LogUtil.e("$TAG  $params")
+        mContainer = FrameLayout(activity)
+        mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
+        mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
         loadBannerAd()
     }
 
     private fun loadBannerAd() {
-        mContainer = FrameLayout(activity)
-        mContainer?.layoutParams?.width = ViewGroup.LayoutParams.WRAP_CONTENT
-        mContainer?.layoutParams?.height = ViewGroup.LayoutParams.WRAP_CONTENT
         adView = AdView(activity, null, autoplay, AdSize.Banner, codeId)
-        adView?.layoutParams = ViewGroup.LayoutParams(viewWidth.toInt(),viewHeight.toInt())
-//        adView = AdView(activity, codeId)
+        adView?.layoutParams = ViewGroup.LayoutParams(viewWidth.toInt(), viewHeight.toInt())
         //支持动态设置APPSID，该信息可从移动联盟获得
         if (!appSid.isNullOrEmpty()) {
             adView?.setAppSid(appSid)
@@ -67,6 +60,7 @@ class BannerAdView(var activity: Activity,
         adView?.setListener(this)
         mContainer?.removeAllViews()
         mContainer?.addView(adView)
+        LogUtil.e("$TAG  Banner广告点击开始加载")
     }
 
     override fun getView(): View {
@@ -101,7 +95,6 @@ class BannerAdView(var activity: Activity,
         LogUtil.e("$TAG  Banner广告加载失败 $p0")
         var map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to p0)
         channel.invokeMethod("onFail", map)
-        dispose()
     }
 
     override fun onAdSwitch() {
@@ -117,6 +110,7 @@ class BannerAdView(var activity: Activity,
 
     override fun dispose() {
         adView?.destroy()
+        mContainer?.removeAllViews()
         adView = null
     }
 }

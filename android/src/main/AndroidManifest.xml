@@ -3,6 +3,19 @@
 
     <application>
 
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+        <!-- 如果targetSdkVersion设置值>=24，则强烈建议添加以下provider，否则会影响app变现 -->
+            <provider
+            android:name="com.baidu.mobads.sdk.api.BdFileProvider"
+            android:authorities="${applicationId}.bd.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/bd_file_paths" />
+        </provider>
         <activity
             android:name="com.baidu.mobads.sdk.api.AppActivity"
             android:configChanges="screenSize|keyboard|keyboardHidden|orientation"
@@ -13,14 +26,6 @@
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <provider
-            android:name="com.baidu.mobads.sdk.api.BdFileProvider"
-            android:authorities="${applicationId}.bd.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/bd_file_paths" />
-        </provider>
+
     </application>
 </manifest>

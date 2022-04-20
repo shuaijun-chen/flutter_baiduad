@@ -121,7 +121,7 @@ class NativeAdView(var activity: Activity,
         mContainer?.layoutParams?.height = height
         mContainer?.addView(feedView)
         mContainer?.setOnClickListener {
-            nativeResponse?.handleClick(view, true)
+//            nativeResponse?.handleClick(view, true)
         }
         nativeResponse?.registerViewForInteraction(mContainer, object : NativeResponse.AdInteractionListener {
             override fun onAdClick() {
@@ -187,6 +187,7 @@ class NativeAdView(var activity: Activity,
     }
 
     override fun dispose() {
+
         mContainer?.removeAllViews()
     }
 }
