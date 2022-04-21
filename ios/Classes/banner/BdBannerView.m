@@ -6,13 +6,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BannerView.h"
+#import "BdBannerView.h"
 #import "BaiduMobAdSDK/BaiduMobAdView.h"
 #import "StringUtls.h"
 #import "BaiduAdManager.h"
 #import "LogUtil.h"
 
-@implementation BannerViewFactory{
+@implementation BdBannerViewFactory{
     NSObject<FlutterBinaryMessenger>*_messenger;
 }
 
@@ -29,7 +29,7 @@
 }
 
 -(NSObject<FlutterPlatformView> *)createWithFrame:(CGRect)frame viewIdentifier:(int64_t)viewId arguments:(id)args{
-    BannerView * bannerView = [[BannerView alloc] initWithWithFrame:frame viewIdentifier:viewId arguments:args binaryMessenger:_messenger];
+    BdBannerView * bannerView = [[BdBannerView alloc] initWithWithFrame:frame viewIdentifier:viewId arguments:args binaryMessenger:_messenger];
     
     return bannerView;
     
@@ -38,7 +38,7 @@
 @end
 
 
-@interface BannerView()<BaiduMobAdViewDelegate>
+@interface BdBannerView()<BaiduMobAdViewDelegate>
 @property(nonatomic,strong) BaiduMobAdView *bdBannerView;
 @property(nonatomic,strong) UIView *container;
 @property(nonatomic,assign) NSInteger viewId;
@@ -49,7 +49,7 @@
 @property(nonatomic,strong) NSNumber *height;
 @end
 
-@implementation BannerView
+@implementation BdBannerView
 
 - (instancetype)initWithWithFrame:(CGRect)frame viewIdentifier:(int64_t)viewId arguments:(id)args binaryMessenger:(NSObject<FlutterBinaryMessenger> *)messenger{
     if ([super init]) {

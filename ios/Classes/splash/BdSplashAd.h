@@ -9,13 +9,13 @@
 #import <Flutter/Flutter.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@interface SplashAdFactory : NSObject<FlutterPlatformViewFactory>
+@interface BdSplashAdFactory : NSObject<FlutterPlatformViewFactory>
 
 - (instancetype)initWithMessenger:(NSObject<FlutterBinaryMessenger>*)messager;
 
 @end
 
-@interface SplashAd : NSObject<FlutterPlatformView>
+@interface BdSplashAd : NSObject<FlutterPlatformView>
 
 - (instancetype)initWithWithFrame:(CGRect)frame
                    viewIdentifier:(int64_t)viewId

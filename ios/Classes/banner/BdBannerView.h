@@ -8,13 +8,13 @@
 #import <Flutter/Flutter.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@interface BannerViewFactory : NSObject<FlutterPlatformViewFactory>
+@interface BdBannerViewFactory : NSObject<FlutterPlatformViewFactory>
 
 - (instancetype)initWithMessenger:(NSObject<FlutterBinaryMessenger>*)messager;
 
 @end
 
-@interface BannerView : NSObject<FlutterPlatformView>
+@interface BdBannerView : NSObject<FlutterPlatformView>
 
 - (instancetype)initWithWithFrame:(CGRect)frame
                    viewIdentifier:(int64_t)viewId

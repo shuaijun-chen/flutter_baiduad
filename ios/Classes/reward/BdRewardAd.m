@@ -5,14 +5,14 @@
 //  Created by 郭维佳 on 2021/11/27.
 //
 
-#import "RewardAd.h"
+#import "BdRewardAd.h"
 #import "BaiduMobAdSDK/BaiduMobAdRewardVideo.h"
 #import "FlutterBaiduadEvent.h"
 #import "BaiduAdManager.h"
 #import "LogUtil.h"
 #import "StringUtls.h"
 
-@interface RewardAd()<BaiduMobAdRewardVideoDelegate>
+@interface BdRewardAd()<BaiduMobAdRewardVideoDelegate>
 
 @property(nonatomic,strong) BaiduMobAdRewardVideo *reward;
 @property(nonatomic,strong) NSString *codeId;
@@ -25,12 +25,12 @@
 
 @end
 
-@implementation RewardAd
+@implementation BdRewardAd
 
 + (instancetype)sharedInstance{
-    static RewardAd *myInstance = nil;
+    static BdRewardAd *myInstance = nil;
     if(myInstance == nil){
-        myInstance = [[RewardAd alloc]init];
+        myInstance = [[BdRewardAd alloc]init];
     }
     return myInstance;
 }

@@ -1,19 +1,18 @@
 //
-//  InsertAd.h
+//  RewardAd.h
 //  flutter_baiduad
 //
-//  Created by 郭维佳 on 2021/11/29.
+//  Created by 郭维佳 on 2021/11/27.
 //
 
 #import <Foundation/Foundation.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface InsertAd : NSObject
+@interface BdRewardAd : NSObject
 
 + (instancetype)sharedInstance;
 - (void)initAd:(NSDictionary *)arguments;
-- (void)showInsertAd;
+- (void)showAd;
 
 @end
 

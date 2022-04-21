@@ -5,7 +5,7 @@
 //  Created by 郭维佳 on 2021/11/29.
 //
 
-#import "InsertAd.h"
+#import "BdInsertAd.h"
 #import "BaiduMobAdSDK/BaiduMobAdExpressInterstitial.h"
 #import "LogUtil.h"
 #import "StringUtls.h"
@@ -13,19 +13,19 @@
 #import "BUIViewController+getCurrentVC.h"
 #import "FlutterBaiduadEvent.h"
 
-@interface InsertAd()<BaiduMobAdExpressIntDelegate>
+@interface BdInsertAd()<BaiduMobAdExpressIntDelegate>
 @property(nonatomic,strong) BaiduMobAdExpressInterstitial *bdInsertAd;
 @property(nonatomic,strong) NSString *codeId;
 @property(nonatomic,strong) NSString *appSid;
 @property(nonatomic,assign) BOOL isFullScreen;
 @end
 
-@implementation InsertAd
+@implementation BdInsertAd
 
 + (instancetype)sharedInstance{
-    static InsertAd *myInstance = nil;
+    static BdInsertAd *myInstance = nil;
     if(myInstance == nil){
-        myInstance = [[InsertAd alloc]init];
+        myInstance = [[BdInsertAd alloc]init];
     }
     return myInstance;
 }

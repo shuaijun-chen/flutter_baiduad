@@ -5,13 +5,13 @@
 //  Created by 郭维佳 on 2021/11/29.
 //
 
-#import "SplashAd.h"
+#import "BdSplashAd.h"
 #import "BaiduMobAdSDK/BaiduMobAdSplash.h"
 #import "StringUtls.h"
 #import "BaiduAdManager.h"
 #import "LogUtil.h"
 
-@implementation SplashAdFactory{
+@implementation BdSplashAdFactory{
     NSObject<FlutterBinaryMessenger>*_messenger;
 }
 
@@ -28,7 +28,7 @@
 }
 
 -(NSObject<FlutterPlatformView> *)createWithFrame:(CGRect)frame viewIdentifier:(int64_t)viewId arguments:(id)args{
-    SplashAd * splashAd = [[SplashAd alloc] initWithWithFrame:frame viewIdentifier:viewId arguments:args binaryMessenger:_messenger];
+    BdSplashAd * splashAd = [[BdSplashAd alloc] initWithWithFrame:frame viewIdentifier:viewId arguments:args binaryMessenger:_messenger];
     
     return splashAd;
     
@@ -36,7 +36,7 @@
 
 @end
 
-@interface SplashAd()<BaiduMobAdSplashDelegate>
+@interface BdSplashAd()<BaiduMobAdSplashDelegate>
 @property (nonatomic, strong) BaiduMobAdSplash *splash;
 @property(nonatomic,strong) UIView *container;
 @property(nonatomic,assign) CGRect frame;
@@ -47,7 +47,7 @@
 @property(nonatomic,strong) NSNumber *timeout;
 @end
 
-@implementation SplashAd
+@implementation BdSplashAd
 
 - (instancetype)initWithWithFrame:(CGRect)frame viewIdentifier:(int64_t)viewId arguments:(id)args binaryMessenger:(NSObject<FlutterBinaryMessenger> *)messenger{
     if ([super init]) {
