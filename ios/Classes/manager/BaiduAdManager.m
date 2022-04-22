@@ -6,7 +6,7 @@
 //
 
 #import "BaiduAdManager.h"
-#import "LogUtil.h"
+#import "BdLogUtil.h"
 
 @interface BaiduAdManager()
 @property(nonatomic,strong)NSString *appid;

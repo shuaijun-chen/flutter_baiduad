@@ -7,7 +7,7 @@
 
 #import "BdInsertAd.h"
 #import "BaiduMobAdSDK/BaiduMobAdExpressInterstitial.h"
-#import "LogUtil.h"
+#import "BdLogUtil.h"
 #import "StringUtls.h"
 #import "BaiduAdManager.h"
 #import "BUIViewController+getCurrentVC.h"

@@ -10,7 +10,7 @@
 #import "BaiduMobAdSDK/BaiduMobAdView.h"
 #import "StringUtls.h"
 #import "BaiduAdManager.h"
-#import "LogUtil.h"
+#import "BdLogUtil.h"
 
 @implementation BdBannerViewFactory{
     NSObject<FlutterBinaryMessenger>*_messenger;

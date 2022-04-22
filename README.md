@@ -1,7 +1,7 @@
 # 腾讯优量汇(广点通)广告 Flutter版本
 
 <p>
-<a href="https://pub.flutter-io.cn/packages/flutter_baiduad"><img src=https://img.shields.io/badge/flutter_baiduad-v0.0.1-success></a>
+<a href="https://pub.flutter-io.cn/packages/flutter_baiduad"><img src=https://img.shields.io/badge/flutter_baiduad-v0.0.2-success></a>
 </p>
 
 ## 简介
@@ -28,6 +28,8 @@ flutter_baiduad是一款集成了百度广告(百青藤)Android和iOS SDK的Flut
 ## 集成步骤
 #### 1、pubspec.yaml
 ```dart
+flutter_baiduad: ^.0.0.2
+//或者
 flutter_baiduad:
     git:
       url: https://github.com/gstory0404/flutter_baiduad.git

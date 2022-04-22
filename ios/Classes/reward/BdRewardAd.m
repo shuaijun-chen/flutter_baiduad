@@ -9,7 +9,7 @@
 #import "BaiduMobAdSDK/BaiduMobAdRewardVideo.h"
 #import "FlutterBaiduadEvent.h"
 #import "BaiduAdManager.h"
-#import "LogUtil.h"
+#import "BdLogUtil.h"
 #import "StringUtls.h"
 
 @interface BdRewardAd()<BaiduMobAdRewardVideoDelegate>

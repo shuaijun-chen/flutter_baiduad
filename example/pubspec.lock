@@ -65,11 +65,9 @@ packages:
   flutter_baiduad:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "50097044eb1ef508cafbfc1ec5196b42ccc322f4"
-      resolved-ref: "50097044eb1ef508cafbfc1ec5196b42ccc322f4"
-      url: "https://github.com/gstory0404/flutter_baiduad.git"
-    source: git
+      path: ".."
+      relative: true
+    source: path
     version: "0.0.1"
   flutter_lints:
     dependency: "direct dev"
