@@ -30,8 +30,8 @@ flutter_baiduad是一款集成了百度广告(百青藤)Android和iOS SDK的Flut
 ```dart
 flutter_baiduad:
     git:
-      url: https://github.com/gstory0404/flutter_baiduad.git
-      ref: 12fe6829b0947d45caea543f2c2eeacaa07c4649
+      url: https://github.com/chenshuaijun/flutter_baiduad.git
+      ref: master
 ```
 引入
 ```Dart
