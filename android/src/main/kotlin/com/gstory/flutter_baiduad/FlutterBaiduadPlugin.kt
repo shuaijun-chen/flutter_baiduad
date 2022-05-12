@@ -2,7 +2,6 @@ package com.gstory.flutter_baiduad
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import android.util.Log
 import androidx.annotation.NonNull
 import com.baidu.mobads.sdk.api.AdSettings
@@ -20,17 +19,13 @@ import com.bun.miitmdid.core.MdidSdkHelper
 import com.bun.miitmdid.interfaces.IIdentifierListener
 import com.bun.miitmdid.interfaces.IdSupplier
 import com.gstory.flutter_baiduad.rewardad.RewardAd
-import com.gstory.flutter_tencentad.LogUtil
+import com.gstory.flutter_tencentad.Log2Util
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import android.app.ActivityManager
-import android.app.ActivityManager.RunningAppProcessInfo
 import android.os.Process
-import android.app.Application.getProcessName
-import android.webkit.WebView
 import com.gstory.flutter_baiduad.fullvideo.FullVideoAd
 import com.gstory.flutter_baiduad.interstitialad.ExpressInsertAd
-import com.gstory.flutter_baiduad.interstitialad.InsertAd
 
 
 /** FlutterBaiduadPlugin */
@@ -96,8 +91,8 @@ class FlutterBaiduadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                             .build())
                     .build(applicationContext)
             bdAdConfig.init()
-            LogUtil.setAppName("flutter_baiduad")
-            LogUtil.setShow(debug!!)
+            Log2Util.setAppName("flutter_baiduad")
+            Log2Util.setShow(debug!!)
             result.success(true)
             //隐私敏感权限API&限制个性化广告推荐
         } else if (call.method == "privacy") {
@@ -116,7 +111,7 @@ class FlutterBaiduadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 MdidSdkHelper.InitSdk(applicationContext, true, object : IIdentifierListener {
                     override fun OnSupport(p0: Boolean, p1: IdSupplier?) {
                         if (p1 == null) {
-                            LogUtil.d("MdidSdkHelper初始化失败")
+                            Log2Util.d("MdidSdkHelper初始化失败")
                             result.success("")
                             return
                         }
@@ -126,7 +121,7 @@ class FlutterBaiduadPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                         })
                         var vaid = p1.vaid
                         var aaid = p1.aaid
-                        LogUtil.d("$p1")
+                        Log2Util.d("$p1")
                     }
                 })
             }catch (e : Exception){

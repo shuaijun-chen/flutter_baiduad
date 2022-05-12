@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.baidu.mobads.sdk.api.RequestParameters
 import com.baidu.mobads.sdk.api.SplashAd
-import com.baidu.mobads.sdk.api.SplashAdListener
 import com.baidu.mobads.sdk.api.SplashInteractionListener
 import com.gstory.flutter_baiduad.FlutterBaiduAdConfig
-import com.gstory.flutter_tencentad.LogUtil
+import com.gstory.flutter_tencentad.Log2Util
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
@@ -77,19 +76,19 @@ class SplashAdView(var activity: Activity,
 
     //广告请求成功
     override fun onADLoaded() {
-        LogUtil.e("$TAG  开屏广告请求成功")
+        Log2Util.e("$TAG  开屏广告请求成功")
     }
 
     //广告加载失败
     override fun onAdFailed(p0: String?) {
-        LogUtil.e("$TAG  开屏广告加载失败 $p0")
+        Log2Util.e("$TAG  开屏广告加载失败 $p0")
         var map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to p0)
         channel.invokeMethod("onFail", map)
     }
 
     //广告落地页关闭
     override fun onLpClosed() {
-        LogUtil.e("$TAG  开屏广告落地页关闭")
+        Log2Util.e("$TAG  开屏广告落地页关闭")
     }
 
     //广告成功展示
@@ -99,24 +98,24 @@ class SplashAdView(var activity: Activity,
 
     //广告关闭
     override fun onAdDismissed() {
-        LogUtil.e("$TAG  开屏广告关闭")
+        Log2Util.e("$TAG  开屏广告关闭")
         channel.invokeMethod("onClose", "")
     }
 
     //广告被点击
     override fun onAdClick() {
-        LogUtil.e("$TAG  开屏广告被点击")
+        Log2Util.e("$TAG  开屏广告被点击")
         channel.invokeMethod("onClick", "")
     }
 
     //广告缓存成功
     override fun onAdCacheSuccess() {
-        LogUtil.e("$TAG  开屏广告缓存成功")
+        Log2Util.e("$TAG  开屏广告缓存成功")
     }
 
     //广告缓存失败
     override fun onAdCacheFailed() {
-        LogUtil.e("$TAG  开屏广告缓存失败")
+        Log2Util.e("$TAG  开屏广告缓存失败")
     }
 
     override fun dispose() {

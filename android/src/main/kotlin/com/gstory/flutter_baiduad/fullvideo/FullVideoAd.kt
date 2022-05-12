@@ -3,10 +3,7 @@ package com.gstory.flutter_baiduad.fullvideo
 import android.annotation.SuppressLint
 import android.content.Context
 import com.baidu.mobads.sdk.api.FullScreenVideoAd
-import com.baidu.mobads.sdk.api.RewardVideoAd
-import com.gstory.flutter_baiduad.FlutterBaiduAdEventPlugin
-import com.gstory.flutter_baiduad.rewardad.RewardAd
-import com.gstory.flutter_tencentad.LogUtil
+import com.gstory.flutter_tencentad.Log2Util
 
 /**
  * @Author: gstory
@@ -46,47 +43,47 @@ object FullVideoAd : FullScreenVideoAd.FullScreenVideoAdListener {
 
     //广告展示回调
     override fun onAdShow() {
-        LogUtil.d("$TAG 全屏视频广告展示")
+        Log2Util.d("$TAG 全屏视频广告展示")
     }
 
     //点击时回调
     override fun onAdClick() {
-        LogUtil.d("$TAG 全屏视频广告展示")
+        Log2Util.d("$TAG 全屏视频广告展示")
     }
 
     //关闭回调，附带播放进度
     override fun onAdClose(p0: Float) {
-        LogUtil.d("$TAG 全屏视频广告关闭回调，附带播放进度 $p0")
+        Log2Util.d("$TAG 全屏视频广告关闭回调，附带播放进度 $p0")
     }
 
     //广告加载失败
     override fun onAdFailed(p0: String?) {
-        LogUtil.d("$TAG 全屏视频广告加载失败 $p0")
+        Log2Util.d("$TAG 全屏视频广告加载失败 $p0")
     }
 
     //视频物料缓存成功
     override fun onVideoDownloadSuccess() {
-        LogUtil.d("$TAG 全屏视频广告视频物料缓存成功")
+        Log2Util.d("$TAG 全屏视频广告视频物料缓存成功")
     }
 
     //视频物料缓存失败
     override fun onVideoDownloadFailed() {
-        LogUtil.d("$TAG 全屏视频广告视频物料缓存失败")
+        Log2Util.d("$TAG 全屏视频广告视频物料缓存失败")
     }
 
     //播放完成回调
     override fun playCompletion() {
-        LogUtil.d("$TAG 全屏视频广告播放完成回调")
+        Log2Util.d("$TAG 全屏视频广告播放完成回调")
     }
 
     //广告跳过回调，附带播放进度
     override fun onAdSkip(p0: Float) {
-        LogUtil.d("$TAG 全屏视频广告跳过回调，附带播放进度 $p0")
+        Log2Util.d("$TAG 全屏视频广告跳过回调，附带播放进度 $p0")
     }
 
     //广告加载成功
     override fun onAdLoaded() {
-        LogUtil.d("$TAG 全屏视频广告加载成功")
+        Log2Util.d("$TAG 全屏视频广告加载成功")
         showFullVideoAd()
     }
 }

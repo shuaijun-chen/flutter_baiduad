@@ -15,7 +15,7 @@ import android.util.Log
  * 可自动把调用位置所在的类名和方法名作为tag，并可设置打印级别
  * dway
  */
-object LogUtil {
+object Log2Util {
     //以下为打印级别，级别从低到高
     const val LOG_LEVEL_VERBOSE = 1
     const val LOG_LEVEL_DEBUG = 2

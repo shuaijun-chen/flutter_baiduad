@@ -11,7 +11,7 @@ import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
 
-import com.gstory.flutter_tencentad.LogUtil
+import com.gstory.flutter_tencentad.Log2Util
 
 
 /**
@@ -110,7 +110,7 @@ class NativeAdView(var activity: Activity,
         var feedView = FeedNativeView(activity)
         var nativeResponse = p0?.get(0) as XAdNativeResponse?
         nativeResponse?.setAdDislikeListener {
-            LogUtil.d("$TAG 信息流广告点击了负反馈渠道")
+            Log2Util.d("$TAG 信息流广告点击了负反馈渠道")
             channel.invokeMethod("onDisLike", "")
         }
         feedView.setAdData(nativeResponse)
@@ -125,12 +125,12 @@ class NativeAdView(var activity: Activity,
         }
         nativeResponse?.registerViewForInteraction(mContainer, object : NativeResponse.AdInteractionListener {
             override fun onAdClick() {
-                LogUtil.d("$TAG 信息流广告点击")
+                Log2Util.d("$TAG 信息流广告点击")
                 channel.invokeMethod("onClick", "")
             }
 
             override fun onADExposed() {
-                LogUtil.d("$TAG 信息流广告曝光成功")
+                Log2Util.d("$TAG 信息流广告曝光成功")
                 channel.invokeMethod("onExpose", "")
             }
 
@@ -141,49 +141,49 @@ class NativeAdView(var activity: Activity,
                 //3：广告View可见区域小于整体大小50%；
                 //4：手机息屏；
                 //6：广告View过小（长宽不足15px）；
-                LogUtil.d("$TAG 信息流广告曝光失败 $p0")
+                Log2Util.d("$TAG 信息流广告曝光失败 $p0")
             }
 
             override fun onADStatusChanged() {
-                LogUtil.d("$TAG 信息流广告下载状态回调")
+                Log2Util.d("$TAG 信息流广告下载状态回调")
             }
 
             override fun onAdUnionClick() {
-                LogUtil.d("$TAG 信息流广告联盟官网点击回调")
+                Log2Util.d("$TAG 信息流广告联盟官网点击回调")
             }
         })
-        LogUtil.d("$TAG 信息流显示 $width  $height")
+        Log2Util.d("$TAG 信息流显示 $width  $height")
         val map: MutableMap<String, Any?> = mutableMapOf("width" to px2dip(activity, width.toFloat()), "height" to px2dip(activity, height.toFloat()))
         channel.invokeMethod("onShow", map)
     }
 
     //广告请求失败
     override fun onNativeFail(p0: Int, p1: String?) {
-        LogUtil.d("$TAG 信息流广告请求失败  $p0  $p1")
+        Log2Util.d("$TAG 信息流广告请求失败  $p0  $p1")
         val map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to p1)
         channel.invokeMethod("onFail", map)
     }
 
     //无广告返回
     override fun onNoAd(p0: Int, p1: String?) {
-        LogUtil.d("$TAG 信息流无广告返回  $p0  $p1")
+        Log2Util.d("$TAG 信息流无广告返回  $p0  $p1")
         val map: MutableMap<String, Any?> = mutableMapOf("code" to 0, "message" to p1)
         channel.invokeMethod("onFail", map)
     }
 
     //视频物料缓存成功
     override fun onVideoDownloadSuccess() {
-        LogUtil.d("$TAG 信息流视频物料缓存成功")
+        Log2Util.d("$TAG 信息流视频物料缓存成功")
     }
 
     //视频物料缓存失败
     override fun onVideoDownloadFailed() {
-        LogUtil.d("$TAG 信息流视频物料缓存失败")
+        Log2Util.d("$TAG 信息流视频物料缓存失败")
     }
 
     //lp页面被关闭（返回键或关闭图标）
     override fun onLpClosed() {
-        LogUtil.d("$TAG 信息流lp页面被关闭")
+        Log2Util.d("$TAG 信息流lp页面被关闭")
     }
 
     override fun dispose() {

@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.baidu.mobads.sdk.api.RewardVideoAd
 import com.gstory.flutter_baiduad.FlutterBaiduAdEventPlugin
-import com.gstory.flutter_tencentad.LogUtil
+import com.gstory.flutter_tencentad.Log2Util
 
 @SuppressLint("StaticFieldLeak")
 object RewardAd : RewardVideoAd.RewardVideoAdListener {
@@ -64,7 +64,7 @@ object RewardAd : RewardVideoAd.RewardVideoAdListener {
 
     //广告展示回调
     override fun onAdShow() {
-        LogUtil.d("$TAG 激励广告广告展示")
+        Log2Util.d("$TAG 激励广告广告展示")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "rewardAd", "onAdMethod" to "onShow")
         FlutterBaiduAdEventPlugin.sendContent(map)
         return
@@ -72,14 +72,14 @@ object RewardAd : RewardVideoAd.RewardVideoAdListener {
 
     //点击时回调
     override fun onAdClick() {
-        LogUtil.d("$TAG 激励广告点击")
+        Log2Util.d("$TAG 激励广告点击")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "rewardAd", "onAdMethod" to "onClick")
         FlutterBaiduAdEventPlugin.sendContent(map)
     }
 
     //关闭回调，附带播放进度
     override fun onAdClose(p0: Float) {
-        LogUtil.d("$TAG 激励广告关闭回调，附带播放进度 $p0")
+        Log2Util.d("$TAG 激励广告关闭回调，附带播放进度 $p0")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "rewardAd", "onAdMethod" to "onClose")
         FlutterBaiduAdEventPlugin.sendContent(map)
         rewardVideoAd = null
@@ -87,45 +87,45 @@ object RewardAd : RewardVideoAd.RewardVideoAdListener {
 
     //广告加载失败
     override fun onAdFailed(p0: String?) {
-        LogUtil.d("$TAG 激励广告加载失败 $p0")
+        Log2Util.d("$TAG 激励广告加载失败 $p0")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "rewardAd", "onAdMethod" to "onFail", "code" to 0, "message" to p0)
         FlutterBaiduAdEventPlugin.sendContent(map)
     }
 
     //视频物料缓存成功
     override fun onVideoDownloadSuccess() {
-        LogUtil.d("$TAG 激励广告视频物料缓存成功")
+        Log2Util.d("$TAG 激励广告视频物料缓存成功")
     }
 
     //视频物料缓存失败
     override fun onVideoDownloadFailed() {
-        LogUtil.d("$TAG 激励广告视频物料缓存失败")
+        Log2Util.d("$TAG 激励广告视频物料缓存失败")
     }
 
     //播放完成回调
     override fun playCompletion() {
-        LogUtil.d("$TAG 激励广告播放完成回调")
+        Log2Util.d("$TAG 激励广告播放完成回调")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "rewardAd", "onAdMethod" to "onFinish")
         FlutterBaiduAdEventPlugin.sendContent(map)
     }
 
     //视频跳过，附带播放进度（当前播放进度/视频总时长 取值范围0-1）
     override fun onAdSkip(p0: Float) {
-        LogUtil.d("$TAG 激励广告视频跳过，附带播放进度（当前播放进度/视频总时长 取值范围0-1）$p0")
+        Log2Util.d("$TAG 激励广告视频跳过，附带播放进度（当前播放进度/视频总时长 取值范围0-1）$p0")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "rewardAd", "onAdMethod" to "onSkip")
         FlutterBaiduAdEventPlugin.sendContent(map)
     }
 
     //广告加载成功
     override fun onAdLoaded() {
-        LogUtil.d("$TAG 广告加载成功")
+        Log2Util.d("$TAG 广告加载成功")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "rewardAd", "onAdMethod" to "onReady")
         FlutterBaiduAdEventPlugin.sendContent(map)
     }
 
     //激励视频奖励回调
     override fun onRewardVerify(p0: Boolean) {
-        LogUtil.d("$TAG 激励视频奖励回调 $p0")
+        Log2Util.d("$TAG 激励视频奖励回调 $p0")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "rewardAd", "onAdMethod" to "onVerify","verify" to p0,"rewardName" to rewardName, "rewardAmount" to rewardAmount)
         FlutterBaiduAdEventPlugin.sendContent(map)
     }

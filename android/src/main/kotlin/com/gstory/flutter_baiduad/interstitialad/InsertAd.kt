@@ -1,11 +1,10 @@
 package com.gstory.flutter_baiduad.interstitialad
 
 import android.app.Activity
-import com.baidu.mobads.sdk.api.AdSize
 import com.baidu.mobads.sdk.api.InterstitialAd
 import com.baidu.mobads.sdk.api.InterstitialAdListener
 import com.gstory.flutter_baiduad.FlutterBaiduAdEventPlugin
-import com.gstory.flutter_tencentad.LogUtil
+import com.gstory.flutter_tencentad.Log2Util
 
 /**
  * @Author: gstory
@@ -49,33 +48,33 @@ object InsertAd : InterstitialAdListener {
 
     //插屏广告加载成功
     override fun onAdReady() {
-        LogUtil.e("$TAG  插屏广告加载成功")
+        Log2Util.e("$TAG  插屏广告加载成功")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "interactAd", "onAdMethod" to "onReady")
         FlutterBaiduAdEventPlugin.sendContent(map)
     }
 
     //插屏广告显示
     override fun onAdPresent() {
-        LogUtil.e("$TAG  插屏广告显示")
+        Log2Util.e("$TAG  插屏广告显示")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "interactAd","onAdMethod" to "onShow")
         FlutterBaiduAdEventPlugin.sendContent(map)
     }
 
     //插屏广告点击
     override fun onAdClick(p0: InterstitialAd?) {
-        LogUtil.e("$TAG  插屏广告点击")
+        Log2Util.e("$TAG  插屏广告点击")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "interactAd", "onAdMethod" to "onClick")
         FlutterBaiduAdEventPlugin.sendContent(map)
     }
 
     //插屏广告关闭
     override fun onAdDismissed() {
-        LogUtil.e("$TAG  插屏广告关闭")
+        Log2Util.e("$TAG  插屏广告关闭")
     }
 
     //广告加载失败
     override fun onAdFailed(p0: String?) {
-        LogUtil.e("$TAG  插屏加载失败")
+        Log2Util.e("$TAG  插屏加载失败")
         var map: MutableMap<String, Any?> = mutableMapOf("adType" to "interactAd","onAdMethod" to "onFail","code" to 0 , "message" to p0)
         FlutterBaiduAdEventPlugin.sendContent(map)
     }
